@@ -14,19 +14,17 @@ def handle_archive(path, root_folder, dist):
     target_folder = root_folder / dist
     target_folder.mkdir(exist_ok=True)
 
-    new_name = normalize.normalize(path.stem)  # Використовуємо .stem
+    new_name = normalize.normalize(path.stem)
 
-    archive_folder = target_folder / new_name  # Змінено root_folder на target_folder
+    archive_folder = target_folder / new_name
     archive_folder.mkdir(exist_ok=True)
 
     try:
         shutil.unpack_archive(str(path.resolve()), str(archive_folder))
     except shutil.ReadError:
-        # Якщо розпакування не вдалося, видаляємо папку
         archive_folder.rmdir()
         return
     except FileNotFoundError:
-        # Якщо архів не знайдено, видаляємо папку
         archive_folder.rmdir()
         return
 
