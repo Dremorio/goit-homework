@@ -1,1 +1,1 @@
-# goit-homework
+GoIT Homework
